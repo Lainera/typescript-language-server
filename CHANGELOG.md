@@ -1,6 +1,142 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [4.0.0](https://github.com/Lainera/typescript-language-server/compare/v3.3.0...v4.0.0) (2023-03-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Remove experimental and legacy implementations of inlay hints and call hierarchy. Use to the official `textDocument/inlayHint` and `textDocument/prepareCallHierarchy` implementations instead.
+* Replace the CLI argument `--tsserver-log-file` with `tsserver.logDirectory` option provided through `initializationOptions` of the `initialize` request.
+* Ship as an ES module. Might be breaking for programmatic users of this server. Read more about consuming ES module packages at gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
+* **deps:** LSP libraries updated to match the 3.17 version of the LSP spec. Requires minimum Node 14.
+
+### Features
+
+* `source.removeUnusedImports.ts` and `source.sortImports.ts` actions ([#681](https://github.com/Lainera/typescript-language-server/issues/681)) ([a43b2df](https://github.com/Lainera/typescript-language-server/commit/a43b2df471572ca2e25b12899f65fca77853af35))
+* ability to ignore diagnostics by code ([#272](https://github.com/Lainera/typescript-language-server/issues/272)) ([3c00910](https://github.com/Lainera/typescript-language-server/commit/3c0091059d5c66e823b666bb949007c6568cee88))
+* add "Go To Source Definition" command ([#560](https://github.com/Lainera/typescript-language-server/issues/560)) ([9bcdaf2](https://github.com/Lainera/typescript-language-server/commit/9bcdaf2b0b09da9aa4d7e6ed79bdcd742b3cfc17))
+* add `_typescript.configurePlugin` workspace command ([#607](https://github.com/Lainera/typescript-language-server/issues/607)) ([59a5217](https://github.com/Lainera/typescript-language-server/commit/59a52174148f3dc95fa2969971a1f95c6e432812))
+* add `tsserver.logDirectory` to `initializationOptions` ([#588](https://github.com/Lainera/typescript-language-server/issues/588)) ([114d430](https://github.com/Lainera/typescript-language-server/commit/114d4309cb1450585f991604118d3eff3690237c))
+* add `tsserver.logVerbosity` and `tsserver.path` to `initializationOptions` ([#611](https://github.com/Lainera/typescript-language-server/issues/611)) ([a03eab5](https://github.com/Lainera/typescript-language-server/commit/a03eab5f1442ad68745d6bec464191a66ab85fc7))
+* add `tsserver.trace` init option for tracing tsserver ([#586](https://github.com/Lainera/typescript-language-server/issues/586)) ([e3e8930](https://github.com/Lainera/typescript-language-server/commit/e3e893094e501e3d6a72148e05f11286d688d2bd))
+* Add insert replace support for completions ([#583](https://github.com/Lainera/typescript-language-server/issues/583)) ([fdf9d11](https://github.com/Lainera/typescript-language-server/commit/fdf9d11200c49a160ed3c3bd523e4792bc98e99d))
+* add new preferences from typescript 4.5.3 ([#304](https://github.com/Lainera/typescript-language-server/issues/304)) ([aed5830](https://github.com/Lainera/typescript-language-server/commit/aed5830380a14eaf165c0898dd52af32b8ed5acc))
+* add npmLocation option to specify NPM location ([#293](https://github.com/Lainera/typescript-language-server/issues/293)) ([1ed30cd](https://github.com/Lainera/typescript-language-server/commit/1ed30cdba2aa898a66c2e382ae3988f6111a6068))
+* add options to disable automatic type acquisition ([#285](https://github.com/Lainera/typescript-language-server/issues/285)) ([9abd5dd](https://github.com/Lainera/typescript-language-server/commit/9abd5dde794ed7fe42e7bc0ada672e037ca788bd))
+* add support for `[@link](https://github.com/link)` references in JSDoc ([#612](https://github.com/Lainera/typescript-language-server/issues/612)) ([3722b51](https://github.com/Lainera/typescript-language-server/commit/3722b51c0ad8e758c4e42f622bbe25ae981071e1))
+* add support for CompletionItem.labelDetails ([#534](https://github.com/Lainera/typescript-language-server/issues/534)) ([3c140d9](https://github.com/Lainera/typescript-language-server/commit/3c140d958507300d7d186adb84f5b0baa549edb2))
+* add support for locale option ([#461](https://github.com/Lainera/typescript-language-server/issues/461)) ([be6a95d](https://github.com/Lainera/typescript-language-server/commit/be6a95ddf6abf8cb68689a6995e3e55858eacb23))
+* add support for new features from TypeScript 4.8 ([#576](https://github.com/Lainera/typescript-language-server/issues/576)) ([7e88db3](https://github.com/Lainera/typescript-language-server/commit/7e88db301a56d6d2dcd0fc1872d6baa386210497))
+* add support for rename prefixText and suffixText on rename ([#478](https://github.com/Lainera/typescript-language-server/issues/478)) ([b3c8535](https://github.com/Lainera/typescript-language-server/commit/b3c85354c71dc36e1d4775bf61d7064a6b85e958))
+* add support for snippet completions of method ([#303](https://github.com/Lainera/typescript-language-server/issues/303)) ([04d0c44](https://github.com/Lainera/typescript-language-server/commit/04d0c443efb19a230571feff8843ee2c56d469e5)), closes [#198](https://github.com/Lainera/typescript-language-server/issues/198)
+* add workspace implicit project defaults configuration ([#605](https://github.com/Lainera/typescript-language-server/issues/605)) ([c6b3947](https://github.com/Lainera/typescript-language-server/commit/c6b39473ed5343f99434506ee034fd0d45a5364d))
+* allow skip destructive actions on running OrganizeImports ([#228](https://github.com/Lainera/typescript-language-server/issues/228)) ([a397cf5](https://github.com/Lainera/typescript-language-server/commit/a397cf58cdacc08bc6de3e520b1bafcd421aa212))
+* announce support for "source.organizeImports.ts-ls" action ([#283](https://github.com/Lainera/typescript-language-server/issues/283)) ([efc3b3f](https://github.com/Lainera/typescript-language-server/commit/efc3b3f11db7bff4f890ef3e5e220f7876d7b706))
+* communicate with tsserver &gt;=4.9.0 using IPC ([#630](https://github.com/Lainera/typescript-language-server/issues/630)) ([06abfde](https://github.com/Lainera/typescript-language-server/commit/06abfdeb133127f4567efb77a2bf725549e9d957))
+* drop experimental `textDocument/calls`, `typescript/inlayHints` ([#647](https://github.com/Lainera/typescript-language-server/issues/647)) ([b15f8a7](https://github.com/Lainera/typescript-language-server/commit/b15f8a7cca8470b0ef9e9878e94fba95e278d372))
+* flake ([6b643ec](https://github.com/Lainera/typescript-language-server/commit/6b643ec104b26ac9abbc9c519608c8e44f033b16))
+* implement `textDocument/selectionRange` request ([#642](https://github.com/Lainera/typescript-language-server/issues/642)) ([a5598c6](https://github.com/Lainera/typescript-language-server/commit/a5598c68aac961cbd6294133a9235e4db5b95929))
+* implement additional code actions for handling auto-fixing ([#318](https://github.com/Lainera/typescript-language-server/issues/318)) ([a92284e](https://github.com/Lainera/typescript-language-server/commit/a92284eeab5db067d48799c3e9bf5165126382e9))
+* implement semantic tokens support ([#290](https://github.com/Lainera/typescript-language-server/issues/290)) ([bd2a889](https://github.com/Lainera/typescript-language-server/commit/bd2a889a23f19aae1ac7fb902ed161f26009624d))
+* implement support for spec version of Call Hierarchy ([#649](https://github.com/Lainera/typescript-language-server/issues/649)) ([3ce0e17](https://github.com/Lainera/typescript-language-server/commit/3ce0e17e72f32913739c9d67d3dfb6092f09a2aa))
+* include "triggerReason" and "kind" in code action requests ([#579](https://github.com/Lainera/typescript-language-server/issues/579)) ([f872078](https://github.com/Lainera/typescript-language-server/commit/f872078fa3b40d8b9b90f737fec7a4c808f1ccc7))
+* include import specifier for import completions ([#281](https://github.com/Lainera/typescript-language-server/issues/281)) ([7b4aeb2](https://github.com/Lainera/typescript-language-server/commit/7b4aeb2f851c29b10e422a960eabf53d87f400bc)), closes [#280](https://github.com/Lainera/typescript-language-server/issues/280)
+* provide filterText property in completions ([#678](https://github.com/Lainera/typescript-language-server/issues/678)) ([af44f8b](https://github.com/Lainera/typescript-language-server/commit/af44f8b1b5a252ca9ba019691ad81dc2e5006468))
+* report progress when loading the project ([#326](https://github.com/Lainera/typescript-language-server/issues/326)) ([4cfff78](https://github.com/Lainera/typescript-language-server/commit/4cfff7841901623750c976a375b6ddac6e641004))
+* send `$/typescriptVersion` notification with TypeScript version ([#674](https://github.com/Lainera/typescript-language-server/issues/674)) ([b081112](https://github.com/Lainera/typescript-language-server/commit/b081112f12a35fa70aae3a134191dea025de64da))
+* start separate tsServer instance for semantic requests ([#688](https://github.com/Lainera/typescript-language-server/issues/688)) ([fa65b84](https://github.com/Lainera/typescript-language-server/commit/fa65b847f4a87672cc28302f38fd86e8f56d6112))
+* support `textDocument/inlayHint` request from 3.17.0 spec ([#566](https://github.com/Lainera/typescript-language-server/issues/566)) ([9a2fd4e](https://github.com/Lainera/typescript-language-server/commit/9a2fd4e34b6c50c57b974f617018dcefdb469788))
+* support `textDocument/prepareRename` request ([#628](https://github.com/Lainera/typescript-language-server/issues/628)) ([9c66794](https://github.com/Lainera/typescript-language-server/commit/9c6679438d6190b72a15f32c0eb83cacd7780213))
+* support `workspace/willRenameFiles` request ([#685](https://github.com/Lainera/typescript-language-server/issues/685)) ([c3f3529](https://github.com/Lainera/typescript-language-server/commit/c3f3529be45a1630fe7903a5af9e732855f2c664))
+* support communicating with tsserver using IPC ([#585](https://github.com/Lainera/typescript-language-server/issues/585)) ([8725b9b](https://github.com/Lainera/typescript-language-server/commit/8725b9bee4432b7520ebd9adc67f4c65303b2c8c))
+* support for canceling LSP requests ([#672](https://github.com/Lainera/typescript-language-server/issues/672)) ([1daf209](https://github.com/Lainera/typescript-language-server/commit/1daf209121fc20bbc0a64ec0491cd40582cb9a4b))
+* support for codeAction disabledSupport client capability ([#578](https://github.com/Lainera/typescript-language-server/issues/578)) ([f93b849](https://github.com/Lainera/typescript-language-server/commit/f93b8493eeafda32c865c93e99025c8ca11c3226))
+* support LocationLink[] for textDocument/definition response ([#563](https://github.com/Lainera/typescript-language-server/issues/563)) ([196f328](https://github.com/Lainera/typescript-language-server/commit/196f328cd9fd7a06998151d59bed0b945cc68b40))
+* support running server on files without root workspace ([#286](https://github.com/Lainera/typescript-language-server/issues/286)) ([fbf72dd](https://github.com/Lainera/typescript-language-server/commit/fbf72dda58df6d485d86a7d38e8d64fc3903ea46))
+* update default typescript options ([#284](https://github.com/Lainera/typescript-language-server/issues/284)) ([2c84b05](https://github.com/Lainera/typescript-language-server/commit/2c84b053ad1e1c245ed75c2a6a98018de8e7ecee))
+* update typescript to 4.9.3 ([#629](https://github.com/Lainera/typescript-language-server/issues/629)) ([0005648](https://github.com/Lainera/typescript-language-server/commit/00056483da3f1089a3a426f08bc66651178c3665))
+
+
+### Bug Fixes
+
+* 114: upgrade to latest monaco ([167752c](https://github.com/Lainera/typescript-language-server/commit/167752c9d651e24b1d2c287abf31b605256d3233))
+* 30, fix [#31](https://github.com/Lainera/typescript-language-server/issues/31): support implementation and type definitions ([1385aee](https://github.com/Lainera/typescript-language-server/commit/1385aee621c798e43ba59546405ff8f6886357fc))
+* 63: update documents on did change ([12f82d5](https://github.com/Lainera/typescript-language-server/commit/12f82d5af939c437210d69aa8d58cdf11d88fd42))
+* 68: restore containerName for non-hierarchical symbols ([59e2860](https://github.com/Lainera/typescript-language-server/commit/59e28609de3ff177e6fefb89ccc3dae6501b8183))
+* add missing semver dependency ([#288](https://github.com/Lainera/typescript-language-server/issues/288)) ([78ec93d](https://github.com/Lainera/typescript-language-server/commit/78ec93d8c661f977fb60a9f72aac2fc4c28486f0))
+* add more logging for resolving user-specified tsserver ([#412](https://github.com/Lainera/typescript-language-server/issues/412)) ([7139a32](https://github.com/Lainera/typescript-language-server/commit/7139a32da05b6e3dfcd3252bde934dc499412d3d))
+* apply refactoring returns -1 positions in ranges ([#502](https://github.com/Lainera/typescript-language-server/issues/502)) ([5f52db0](https://github.com/Lainera/typescript-language-server/commit/5f52db0383d6c326cd321c13fc969ab9d3958011))
+* call configure before completion resolve ([#377](https://github.com/Lainera/typescript-language-server/issues/377)) ([a3c3af4](https://github.com/Lainera/typescript-language-server/commit/a3c3af4c2561b114e9418be9ceb5513b4e01e676))
+* cancel pending geterr request before triggering new ([#651](https://github.com/Lainera/typescript-language-server/issues/651)) ([95b92e5](https://github.com/Lainera/typescript-language-server/commit/95b92e5d15f47eea77e08765a1e378dbcd90d1f0))
+* change default log level from "warn" to "info" ([#287](https://github.com/Lainera/typescript-language-server/issues/287)) ([3c109d5](https://github.com/Lainera/typescript-language-server/commit/3c109d581aa7d57c2c9610675569bd09ea6e55cd))
+* completion for strings with trigger character ([#492](https://github.com/Lainera/typescript-language-server/issues/492)) ([76bf9a4](https://github.com/Lainera/typescript-language-server/commit/76bf9a4817ffa1e340422cfd5177dbcb96528ddb))
+* **completions:** don't create snippet kind without `completeFunctionCalls` ([#595](https://github.com/Lainera/typescript-language-server/issues/595)) ([7f69c27](https://github.com/Lainera/typescript-language-server/commit/7f69c27eb8cce71d3db006623757a74f93d76dd3))
+* **completions:** don't insert call snippet if already a call ([#646](https://github.com/Lainera/typescript-language-server/issues/646)) ([5d34de5](https://github.com/Lainera/typescript-language-server/commit/5d34de5fd38ce5a9dcafc4a385ccb39b0a89f2b0))
+* **completions:** don't set `filterText` after all ([#686](https://github.com/Lainera/typescript-language-server/issues/686)) ([4c5d295](https://github.com/Lainera/typescript-language-server/commit/4c5d295d4f71f6b5d8f2c58e908d5cc79cb9e3d2))
+* **completions:** don't set commitCharacters unless client supports those ([#684](https://github.com/Lainera/typescript-language-server/issues/684)) ([af10a97](https://github.com/Lainera/typescript-language-server/commit/af10a977f38626797dbadca935c71f92556fdb39))
+* **completions:** include `filterText` property by default ([#693](https://github.com/Lainera/typescript-language-server/issues/693)) ([c07426a](https://github.com/Lainera/typescript-language-server/commit/c07426adc8b079273c267e18d11993d53d482886))
+* **completions:** remove filterText override for bracket accessor ([#593](https://github.com/Lainera/typescript-language-server/issues/593)) ([1ed4e2e](https://github.com/Lainera/typescript-language-server/commit/1ed4e2eccf0b52e10204b5c2617d4944ae513afd))
+* correct matching of "only" kinds provided by the client ([#334](https://github.com/Lainera/typescript-language-server/issues/334)) ([d85ff92](https://github.com/Lainera/typescript-language-server/commit/d85ff9202740b69ec625401113795041977b68f7))
+* declare quickfix/refactor CodeAction capabilities ([#553](https://github.com/Lainera/typescript-language-server/issues/553)) ([e76fc64](https://github.com/Lainera/typescript-language-server/commit/e76fc6493295649d6ada83c8a5f6d88abe2a6167))
+* definition request crashing on getting span ([#574](https://github.com/Lainera/typescript-language-server/issues/574)) ([4e1c82b](https://github.com/Lainera/typescript-language-server/commit/4e1c82b82878316a12ff6b524d7dd5ab54b86acd))
+* **deps:** update devdependency typescript to ^4.9.4 ([#637](https://github.com/Lainera/typescript-language-server/issues/637)) ([d2b18b6](https://github.com/Lainera/typescript-language-server/commit/d2b18b6d318c4b441e42f4f977ba6bd4eca36d58))
+* **deps:** update devdependency typescript to ^4.9.5 ([#677](https://github.com/Lainera/typescript-language-server/issues/677)) ([916c326](https://github.com/Lainera/typescript-language-server/commit/916c326d576b9f13a05563495dffa27b4d02ee6e))
+* disable IPC communication until TypeScript bug is fixed ([#600](https://github.com/Lainera/typescript-language-server/issues/600)) ([a6153a6](https://github.com/Lainera/typescript-language-server/commit/a6153a66e88bed52704761f92dd4168605ef9a45))
+* don't announce support for codeActionKinds ([#289](https://github.com/Lainera/typescript-language-server/issues/289)) ([5952416](https://github.com/Lainera/typescript-language-server/commit/59524162a9c7c681bf43adac4466fb6ccb225591))
+* don't create empty code blocks in hover result ([#276](https://github.com/Lainera/typescript-language-server/issues/276)) ([f25d82e](https://github.com/Lainera/typescript-language-server/commit/f25d82eda97dc84373bc4782d9b5196f67d0d4fc))
+* don't transform Yarn zipfile URIs ([#384](https://github.com/Lainera/typescript-language-server/issues/384)) ([9d451ea](https://github.com/Lainera/typescript-language-server/commit/9d451eaceea71693ad1e262b866218ac7ef60325))
+* don't transform zipfile URIs from Vim ([#386](https://github.com/Lainera/typescript-language-server/issues/386)) ([2f5a8d9](https://github.com/Lainera/typescript-language-server/commit/2f5a8d93372b92ac1102d0a3199719dd72e7eb2c))
+* don't trigger error on empty Source Definition response ([#568](https://github.com/Lainera/typescript-language-server/issues/568)) ([146a6ba](https://github.com/Lainera/typescript-language-server/commit/146a6ba97f0792701ff8afcc431d3a1dfdb978a6))
+* don't use the postinstall script ([#364](https://github.com/Lainera/typescript-language-server/issues/364)) ([0178e9c](https://github.com/Lainera/typescript-language-server/commit/0178e9cce330633b77bc52869cad63cd1dba19b2))
+* ellipsis at the end of the loading project text ([127b600](https://github.com/Lainera/typescript-language-server/commit/127b6002889fc209d72d9210187216c6f6433d8a))
+* ensure that the tsserver subprocess uses same node instance ([#292](https://github.com/Lainera/typescript-language-server/issues/292)) ([d9e07a1](https://github.com/Lainera/typescript-language-server/commit/d9e07a155c41c68072b74751041bb162415f9897)), closes [#191](https://github.com/Lainera/typescript-language-server/issues/191)
+* exit the server if tsserver process crashes ([#305](https://github.com/Lainera/typescript-language-server/issues/305)) ([5e2c17a](https://github.com/Lainera/typescript-language-server/commit/5e2c17a5a4da6e743f4b5b4dcc36b441e1a329c5))
+* handle shutdown lifecycle properly ([#536](https://github.com/Lainera/typescript-language-server/issues/536)) ([ac8536b](https://github.com/Lainera/typescript-language-server/commit/ac8536bf8eb805bfc28e484a8f4827b5375d6824))
+* help users resolve no valid tsserver version error ([#337](https://github.com/Lainera/typescript-language-server/issues/337)) ([d835543](https://github.com/Lainera/typescript-language-server/commit/d835543e455a51ec159457a1479a550712574099))
+* line offset off by one when at the last line ([#683](https://github.com/Lainera/typescript-language-server/issues/683)) ([0db9a5f](https://github.com/Lainera/typescript-language-server/commit/0db9a5faa4bc03560506ffd030e795a35e45e3f8))
+* loading progress sometimes getting stuck ([#603](https://github.com/Lainera/typescript-language-server/issues/603)) ([8cf4381](https://github.com/Lainera/typescript-language-server/commit/8cf43810e0ff7a32d3499afc6da2344939b2d6de))
+* lookup workspace typescript in dirs higher up the tree also ([#314](https://github.com/Lainera/typescript-language-server/issues/314)) ([b715c64](https://github.com/Lainera/typescript-language-server/commit/b715c64442860fd97e81b4bb98ff8e20c25b9f18))
+* make wording in the typescript lookup error more generic ([585a05e](https://github.com/Lainera/typescript-language-server/commit/585a05e43a0b530f10e488aed634fac0436109ae)), closes [#554](https://github.com/Lainera/typescript-language-server/issues/554)
+* mark import completions as snippets ([#291](https://github.com/Lainera/typescript-language-server/issues/291)) ([b8dc6af](https://github.com/Lainera/typescript-language-server/commit/b8dc6af3a00a268c34910488f03ef9eb9351f6a1))
+* move deepmerge to dependencies ([06109d4](https://github.com/Lainera/typescript-language-server/commit/06109d4646d94bdf1bbeb2768e18f1323ae1b630))
+* normalize client and tsserver paths ([#275](https://github.com/Lainera/typescript-language-server/issues/275)) ([1eb20c2](https://github.com/Lainera/typescript-language-server/commit/1eb20c2119c5896b317c6ddc4cab0d6dfcedf40d))
+* only use optionalReplacementSpan if client supports InsertReplace ([#584](https://github.com/Lainera/typescript-language-server/issues/584)) ([899ba6b](https://github.com/Lainera/typescript-language-server/commit/899ba6b5c5f13faac8eec6478ced4d9f8d90836d))
+* pass format options for organizing import ([#348](https://github.com/Lainera/typescript-language-server/issues/348)) ([28feb26](https://github.com/Lainera/typescript-language-server/commit/28feb26e95e1a987af719a4e4e4cfbc8fc9bba5d))
+* pin old version of LSP libraries for node &lt;14 compatibility ([#467](https://github.com/Lainera/typescript-language-server/issues/467)) ([55600e1](https://github.com/Lainera/typescript-language-server/commit/55600e12635c01d5a531b776b33d10f9e622a7a6))
+* remove hard dependency on typescript ([#661](https://github.com/Lainera/typescript-language-server/issues/661)) ([9a2e2c8](https://github.com/Lainera/typescript-language-server/commit/9a2e2c83d4992cd90cebc706618a9af604fcf1a9))
+* remove unsupported --node-ipc and --socket options ([#278](https://github.com/Lainera/typescript-language-server/issues/278)) ([8cb6773](https://github.com/Lainera/typescript-language-server/commit/8cb67732ddab464de743ff1d048a4de04024c1a8)), closes [#111](https://github.com/Lainera/typescript-language-server/issues/111)
+* respect "includeDeclaration" for references request ([#306](https://github.com/Lainera/typescript-language-server/issues/306)) ([0163906](https://github.com/Lainera/typescript-language-server/commit/0163906346dcfa2a33176e84fd5b3c3af654fe57))
+* respect user-provided tsserver.js path from `--tsserver-path` ([#610](https://github.com/Lainera/typescript-language-server/issues/610)) ([417339f](https://github.com/Lainera/typescript-language-server/commit/417339fa66bc1910c80888c3f909e3d059da8ee5))
+* restore tsserver version logging on initialization ([#669](https://github.com/Lainera/typescript-language-server/issues/669)) ([232219c](https://github.com/Lainera/typescript-language-server/commit/232219cd0fe138558ed98e22aa7314e0941e4f10))
+* snippet completions returned to clients that don't support them ([#556](https://github.com/Lainera/typescript-language-server/issues/556)) ([050d335](https://github.com/Lainera/typescript-language-server/commit/050d3350e16fe78b7c60d7443ed3ad6d2cc4730d))
+* specify minimum node version to be v12 ([#301](https://github.com/Lainera/typescript-language-server/issues/301)) ([b2d8583](https://github.com/Lainera/typescript-language-server/commit/b2d858366f710bfa3a934179183e0eca0a5b6208))
+* surface stderr output from the tsserver process ([#624](https://github.com/Lainera/typescript-language-server/issues/624)) ([adf2689](https://github.com/Lainera/typescript-language-server/commit/adf268927a2f4b5e689572be9bedc349573aadd5))
+* update signature help feature to v3.15.0 LSP spec ([#555](https://github.com/Lainera/typescript-language-server/issues/555)) ([da074a6](https://github.com/Lainera/typescript-language-server/commit/da074a618ca6c29819834a0344682094d6ff08f6))
+* use correct name for the addMissingImports code action ([#371](https://github.com/Lainera/typescript-language-server/issues/371)) ([5e31236](https://github.com/Lainera/typescript-language-server/commit/5e3123666c5f2d1810125bd1cd40f1e93f3ad912))
+* use snippet type for jsx attribute completions ([#362](https://github.com/Lainera/typescript-language-server/issues/362)) ([989d92d](https://github.com/Lainera/typescript-language-server/commit/989d92d8a931600582266ff772442d7acf7f802b))
+* wait for tsserver configuration requests to finish ([#372](https://github.com/Lainera/typescript-language-server/issues/372)) ([51673f2](https://github.com/Lainera/typescript-language-server/commit/51673f2d91db9039b5c8db956387b25bd3271728))
+* wrong import completion when insert/replace supported ([#592](https://github.com/Lainera/typescript-language-server/issues/592)) ([4fe902a](https://github.com/Lainera/typescript-language-server/commit/4fe902a9e28ec4c3ccc14a9e75488efeb8079544))
+
+
+### chore
+
+* **deps:** update LSP libraries to match 3.17 spec ([#532](https://github.com/Lainera/typescript-language-server/issues/532)) ([bdbdd83](https://github.com/Lainera/typescript-language-server/commit/bdbdd8379815583aa28d2a770034253050ba24de))
+
+
+### Refactors
+
+* await configuration requests on inline hint request ([25584e5](https://github.com/Lainera/typescript-language-server/commit/25584e593b41b598bf9cc169e2a07bfccdfc74da))
+* bundle with rollup and switch to jest for testing ([#663](https://github.com/Lainera/typescript-language-server/issues/663)) ([2c9eb63](https://github.com/Lainera/typescript-language-server/commit/2c9eb632659a3bb9995095576afe88e84833bbdd))
+* create ConfigurationManager for handling configuration ([#564](https://github.com/Lainera/typescript-language-server/issues/564)) ([aac2d16](https://github.com/Lainera/typescript-language-server/commit/aac2d16416a7af5d67b496a1e0badcaee4b9e42a))
+* don't log when ts client exits with missing or 0 exit code ([507db40](https://github.com/Lainera/typescript-language-server/commit/507db40c6c40102868f85af3e1bcaad3b9ae84f4))
+* enable strict mode for typescript ([#562](https://github.com/Lainera/typescript-language-server/issues/562)) ([7c0ad9f](https://github.com/Lainera/typescript-language-server/commit/7c0ad9f253ecefc5a9e61c9e58d1dabc6bcbac57))
+* logger implementation ([#590](https://github.com/Lainera/typescript-language-server/issues/590)) ([4d0db33](https://github.com/Lainera/typescript-language-server/commit/4d0db3375dcda5b49108be4b2cbeb781f80eaf3e))
+* move versionProvider to tsServer directory ([0960a6b](https://github.com/Lainera/typescript-language-server/commit/0960a6bb2bc02f71a61211d4932fdda524d59ef9))
+* remove some code repetition in request definitions ([e3d6cd7](https://github.com/Lainera/typescript-language-server/commit/e3d6cd751f59c4f024f6705790ee734eed472079))
+* ship as an ES module ([#547](https://github.com/Lainera/typescript-language-server/issues/547)) ([0dfd411](https://github.com/Lainera/typescript-language-server/commit/0dfd41125c04868b547a3893334bb0bb822e0517))
+* use lsp lib helper methods ([#561](https://github.com/Lainera/typescript-language-server/issues/561)) ([e8c262d](https://github.com/Lainera/typescript-language-server/commit/e8c262d906599f65ec867eae4d8bf7bf8e5886b0))
+
 ## [3.3.0](https://github.com/typescript-language-server/typescript-language-server/compare/v3.2.0...v3.3.0) (2023-02-20)
 
 
