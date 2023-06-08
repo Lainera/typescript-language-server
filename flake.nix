@@ -2,12 +2,12 @@
   description = "TS Server nix flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     flake-utils.url = "github:numtide/flake-utils";
     dream2nix = {
-			url = "github:lainera/dream2nix";
+      url = "github:lainera/dream2nix/fix/nodejs-version";
       inputs.nixpkgs.follows = "nixpkgs";
-		};
+    };
     gitignore = {
       url = "github:hercules-ci/gitignore.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,7 +26,7 @@
             name = "typescript-language-server";
             subsystem = "nodejs";
             translator = "yarn-lock";
-						subsystemInfo.nodejs = "19";
+            subsystemInfo.nodejs = "20";
           };
         };
 
